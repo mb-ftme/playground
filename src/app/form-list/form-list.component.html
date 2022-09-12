@@ -1,0 +1,10 @@
+{{ model | json }}
+<form #userPost="ngForm" (ngSubmit)="onSubmit(userPost)" >
+ <input class="au-input" type="text" name="code" [(ngModel)]="model.description"  ngModel placeholder="code" ><br><br>
+  <input class="au-input" type="text" name="num"  placeholder="num"><br><br>
+  <button class="btn" type="submit">submit
+  </button>
+
+
+
+</form>

@@ -1,4 +1,4 @@
-export class SMS {
+export class Form {
 
   description: string;
   nationalcode:string;

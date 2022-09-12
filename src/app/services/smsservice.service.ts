@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, Observable} from "rxjs";
-import {Product} from "../models/Product";
-import {SMS} from "../models/sms";
-import {ShahkarReqJson} from "../shahkar-req-json";
-import {shahkarRes} from "../shahkar-response";
+
+import {ShahkarReqJson} from "../shahkar/shahkar-req-json";
+import {shahkarRes} from "../shahkar/shahkar-response";
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +16,6 @@ export class SMSServiceService {
 
 
 
-  // getProductList(): Observable<SMS[]> {
-  //   let observable = this.http.post<shahkarResponse>(this.getProductsUrl,).pipe(
-  //     /*map is imported from rxjs/operators or automatically from rxjs */
-  //     map(value => value.data[0].comment)
-  //   );
-  //   console.log(observable)
-  //   return observable;
-  // }
 
    httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -34,11 +25,15 @@ export class SMSServiceService {
   getResponse(shahkarReqJson: ShahkarReqJson): Observable<String> {
     let observable= this.http.post<shahkarRes>(this.shahkarUrl, ShahkarReqJson,this.httpOptions )
       .pipe(map(value =>value.data[0].comment));
-   console.log(observable)
+  // console.log(observable)
     return observable;
 
 
   }
+
+
+
+
 
 }
 interface shahkarResponseJson {
