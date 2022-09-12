@@ -1,4 +1,4 @@
-export class Form {
+export class ChaparRQ {
 
   description: string;
   nationalcode:string;

@@ -30,12 +30,18 @@ export class SMSServiceService {
 
 
   }
+  // onSubmit(data){
+  //   this.http.post(this.shahkarUrl,data)
+  //     .subscribe((result)=>{
+  //       console.warn("result",result);
+  //     })
 
 
 
 
 
-}
+
+  }
 interface shahkarResponseJson {
 
   "data": [

@@ -5,8 +5,9 @@ import {HttpClient} from "@angular/common/http";
 import {ShahkarReqJson} from "../shahkar/shahkar-req-json";
 
 import {SMSServiceService} from "../services/smsservice.service";
-import {FormControl} from "@angular/forms";
-import {Form} from "../models/form";
+
+import {ChaparRQ} from "../models/chaparRQ";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -15,46 +16,59 @@ import {Form} from "../models/form";
   styleUrls: ['./form-list.component.css']
 })
 export class FormListComponent implements OnInit {
-  comment?:String;
-  model=new Form("0034","0035");
+  form!: FormGroup;
+  comment?: String;
 
-  private fatemehShahkarReq: ShahkarReqJson=new ShahkarReqJson("0022236457","09924011072");
+  firstName = new FormControl("ali", Validators.required);
+
+  private shahkarUrl: string = "http://192.168.16.171:8080/shahkar-secondary-end-point";
+ // model = new ChaparRQ("0034", "0035");
+
+  private fatemehShahkarReq: ShahkarReqJson = new ShahkarReqJson("0022236457", "09924011072");
+
   // private dtaa!:FormControl;
 
   ngOnInit(): void {
 
     this.showComment();
- // this.onSubmit(this.dtaa);
- //
-  }
-  constructor(private http:HttpClient,private smsServiceService:SMSServiceService) {
+    // this.onSubmit(this.dtaa);
+    //
   }
 
-  private showComment():void{
+  constructor(private http: HttpClient,
+              private smsServiceService: SMSServiceService
+              ,fb:FormBuilder) {
+    this.form=fb.group({
+      "firstName": this.firstName,
+      "password":["",Validators.required]
+    });
+  }
+
+  private showComment(): void {
     this.smsServiceService.getResponse(this.fatemehShahkarReq)
-      .subscribe(value => this.comment=value)
+      .subscribe(value => this.comment = value)
 
   }
-
 
 
   // @ts-ignore
-  onSubmit(data){
-    this.http.post('http://localhost:5000',data)
-      .subscribe((result)=>{
-        console.warn("result",result);
+  // onSubmit(data){
+  //   this.http.post('http://localhost:5000',data)
+  //     .subscribe((result)=>{
+  //       console.warn("result",result);
+  //     })
+
+  // console.warn(data);
+
+  // }
+  onSubmit(data) {
+ console.log(this.form.value)
+    this.smsServiceService.getResponse(data)
+
+      .subscribe((result) => {
+        console.warn("result", result);
       })
 
-    console.warn(data);
 
   }
-
-
-
-
-
-
-
-
-
 }
