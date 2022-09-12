@@ -19,10 +19,10 @@ export class FormListComponent implements OnInit {
   form!: FormGroup;
   comment?: String;
 
-  firstName = new FormControl("ali", Validators.required);
+  firstName = new FormControl("", Validators.required);
 
   private shahkarUrl: string = "http://192.168.16.171:8080/shahkar-secondary-end-point";
- // model = new ChaparRQ("0034", "0035");
+  // model = new ChaparRQ("0034", "0035");
 
   private fatemehShahkarReq: ShahkarReqJson = new ShahkarReqJson("0022236457", "09924011072");
 
@@ -37,10 +37,10 @@ export class FormListComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private smsServiceService: SMSServiceService
-              ,fb:FormBuilder) {
-    this.form=fb.group({
+    , fb: FormBuilder) {
+    this.form = fb.group({
       "firstName": this.firstName,
-      "password":["",Validators.required]
+      "password": ["", Validators.required]
     });
   }
 
@@ -50,25 +50,26 @@ export class FormListComponent implements OnInit {
 
   }
 
-
+  //
   // @ts-ignore
-  // onSubmit(data){
-  //   this.http.post('http://localhost:5000',data)
-  //     .subscribe((result)=>{
-  //       console.warn("result",result);
+  // onSubmit(mmm) {
+  //   mmm=this.form.value
+  //   this.http.post('http://localhost:5000', mmm)
+  //     .subscribe((result) => {
+  //       console.warn("result", result);
   //     })
-
+  // }
   // console.warn(data);
 
-  // }
-  onSubmit(data) {
- console.log(this.form.value)
-    this.smsServiceService.getResponse(data)
 
+  onSubmit(mm) {
+    mm = this.form.value
+    console.log(mm)
+    this.smsServiceService.getResponse(mm)
       .subscribe((result) => {
         console.warn("result", result);
       })
 
-
   }
+
 }
