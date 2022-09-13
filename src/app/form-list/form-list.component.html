@@ -1,16 +1,18 @@
 <section class="sample-app-content">
   <h1>Model-based Form Example:</h1>
-  <form #f [formGroup]="form" (ngSubmit)="onSubmit(f)">
+  <form  [formGroup]="restForm" (ngSubmit)="onSubmit()">
     <p>
-      <label>First Name:</label>
-      <input type="text" formControlName="firstName">
+      <label>message:</label>
+      <input type="text" formControlName="message">
     </p>
     <p>
-      <label>Password:</label>
-      <input type="password" formControlName="password">
+      <label>nationalCode:</label>
+      <input type="text" formControlName="nationalCode">
     </p>
     <p>
-      <button type="submit" [disabled]="!form.valid">Submit</button>
+      <button type="submit" >Submit</button>
     </p>
+
+    <h2>{{}}</h2>
   </form>
 </section>
