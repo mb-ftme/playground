@@ -1,18 +1,20 @@
 <section class="sample-app-content">
-  <h1>Model-based Form Example:</h1>
+
   <form [formGroup]="restForm" (ngSubmit)="onSubmit()">
     <p>
-      <label>message:</label>
+      <label>متن پیام:</label>
       <input type="text" formControlName="message">
     </p>
     <p>
-      <label>nationalCode:</label>
+      <label>کدملی:</label>
       <input type="text" formControlName="nationalCode">
     </p>
     <p>
-      <button type="submit">Submit</button>
+      <button class="btn" type="submit">ثبت</button>
     </p>
-
+<p>
+  {{myhtmlValue}}
+</p>
 
   </form>
 </section>

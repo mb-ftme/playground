@@ -1,15 +1,16 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
-import {ShahkarReqJson} from "../shahkar/shahkar-req-json";
+
 
 import {SMSServiceService} from "../services/smsservice.service";
 
 import {ChaparRQ} from "../models/chaparRQ";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable} from "rxjs";
-import {shahkarRes} from "../shahkar/shahkar-response";
+
+import {chaparRES} from "../models/chaparRES";
 
 
 @Component({
@@ -19,7 +20,11 @@ import {shahkarRes} from "../shahkar/shahkar-response";
 })
 export class FormListComponent implements OnInit {
   form!: FormGroup;
-
+   // @ts-ignore
+   myhtmlValue:String;
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+  };
   restForm = new FormGroup({
     message: new FormControl(''),
     nationalCode: new FormControl('')
@@ -30,7 +35,9 @@ export class FormListComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    // البته زمان اینیشالایز نباید سابسکرایب کرد
+    // اینجا زمان فرستادن فرم باید سابسکراب کرد و متغییر رو پر کرد
+    //الان من نفهمیدم
   }
 
   constructor(private http: HttpClient, private smsServiceService: SMSServiceService
@@ -42,17 +49,49 @@ export class FormListComponent implements OnInit {
   onSubmit() {
 
      this.http.post(this.url, this.restForm.value).subscribe((data) => {
-      console.warn(data)
+      console.warn(data) })
+    let sta = this.getResponse(<ChaparRQ>this.restForm.value).subscribe((data) => {
+      console.log(sta)
+      // @ts-ignore
+      this.myhtmlValue = data;// نه مشکل تایپ و نوعش هست
+      // String ?!= string
+      //مرسی رییس حالا چ کنم
+      // باید بیرون تعریف کنی تا جز فیلد های کلاس باشه
+      //اینجوری یعنی؟
+      // نه
+      // ببین sta نوع دیتاش آبسروایبل هست
+      // تو باید استرینگ رو بگیری که همون دیتا میشه
+      // و خود استرینگ رو لاگ کمی یا پاس بدی به یک متغییر توی اچ تی ام ال
+
+
+
+      // این ورودی میشه برای رکوعست بعد از پر شدن فرم و زدن دکمه سابمیت
 
     })
     // @ts-ignore
     console.log(seta)
   }
-  getResponse(ReqJson: ShahkarReqJson): Observable<String> {
-    let observable= this.http.post<shahkarRes>(this.shahkarUrl, ShahkarReqJson,this.httpOptions )
-      .pipe(map(value =>value.data[0].comment));
-    // console.log(observable)
-    return observable;
+//ببین اینجا مشکل چیه
+  getResponse(Ch:ChaparRQ): Observable<String> {
+    // console.log('getres' + this.url + "******")
+    // return this.http.get<chaparRES>(this.url)
+    //این باید پست باشه؟بله
+    return this.http.post<chaparRES>(this.url,Ch,this.httpOptions)//خوب ادامه بده
+      .pipe(map(value => value.status));
+    // خب الان چون تو فقط استاتوس رو از توی پایپ یا همون لوله رد میکنی تایپ خروجی که ریترن میشه
+    // تغییر میکنه از  درسته الان
+    // فقط باید به یک لوله یا آبسروایبل از نوع استرینگ سابسکرایب کنی
+    // کجا ؟ زمانی که برنامه کامپوننت رو اینیشالایز میکنه
+    // یعنی توی ng on init
+    // اونجا باید گوش کرد و آماده دریافت مقدار استرینگ شد
+    // وبه محض پر شدن اون رو به یک متغییر داد
+    // تا توی اچ تی ام ال نشون بده
+    // @ts-ignore
+    //   let observable= this.http.post<chaparRES>(this.url, ChaparRQ,this.httpOptions )
+    //     .pipe(map(value =>value.status));
+    //   console.log(status)
+    // return observable;
 
 
-}}
+  }
+}

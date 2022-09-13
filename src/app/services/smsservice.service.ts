@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, Observable} from "rxjs";
 
-import {ShahkarReqJson} from "../shahkar/shahkar-req-json";
-import {shahkarRes} from "../shahkar/shahkar-response";
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +20,12 @@ export class SMSServiceService {
     headers: new HttpHeaders({'Content-Type': 'application/json'}),
   };
 
-
-  getResponse(shahkarReqJson: ShahkarReqJson): Observable<String> {
-    let observable= this.http.post<shahkarRes>(this.shahkarUrl, ShahkarReqJson,this.httpOptions )
-      .pipe(map(value =>value.data[0].comment));
-  // console.log(observable)
-    return observable;
+  //
+  // getResponse(shahkarReqJson: ShahkarReqJson): Observable<String> {
+  //   let observable= this.http.post<shahkarRes>(this.shahkarUrl, ShahkarReqJson,this.httpOptions )
+  //     .pipe(map(value =>value.data[0].comment));
+  // // console.log(observable)
+  //   return observable;
 
 
   }
@@ -41,7 +40,7 @@ export class SMSServiceService {
 
 
 
-  }
+  // }
 interface shahkarResponseJson {
 
   "data": [
