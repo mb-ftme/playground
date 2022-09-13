@@ -1,15 +1,15 @@
 export class ChaparRQ {
 
   description: string;
-  nationalcode:string;
+  nationalCode:string;
 
 
 
 
-  constructor( description: string, nationalcode:string ) {
+  constructor( description: string, nationalCode:string ) {
 
     this.description = description;
-    this.nationalcode = nationalcode;
+    this.nationalCode = nationalCode;
 
   }
 }

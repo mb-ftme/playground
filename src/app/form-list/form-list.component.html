@@ -1,6 +1,6 @@
 <section class="sample-app-content">
   <h1>Model-based Form Example:</h1>
-  <form  [formGroup]="restForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="restForm" (ngSubmit)="onSubmit()">
     <p>
       <label>message:</label>
       <input type="text" formControlName="message">
@@ -10,9 +10,9 @@
       <input type="text" formControlName="nationalCode">
     </p>
     <p>
-      <button type="submit" >Submit</button>
+      <button type="submit">Submit</button>
     </p>
 
-    <h2>{{}}</h2>
+
   </form>
 </section>
