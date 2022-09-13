@@ -1,6 +1,6 @@
 <section class="sample-app-content">
 
-  <form [formGroup]="restForm" (ngSubmit)="onSubmit()">
+  <form routerLink="login" [formGroup]="restForm" (ngSubmit)="onSubmit()">
     <p>
       <label>متن پیام:</label>
       <input type="text" formControlName="message">

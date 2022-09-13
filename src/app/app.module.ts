@@ -9,12 +9,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FormListComponent } from './form-list/form-list.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import {AuthService} from "./AuthService";
+import {AppRoutingModule} from "./AppRoutingModule";
+import {Router, RouterModule} from "@angular/router";
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormListComponent,
     LoginComponentComponent,
+    FormListComponent,
+
 
   ],
   imports: [
@@ -22,7 +27,8 @@ import {AuthService} from "./AuthService";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-
+    AppRoutingModule,
+    RouterModule,
 
 
   ],
