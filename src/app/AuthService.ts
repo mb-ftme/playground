@@ -14,7 +14,8 @@ export class AuthService {
 
   login(userName:string, password:string ) {
 
-    let userRSObservable = this.http.post<userRS>('http://localhost:8080/api/v1/auth/login', {userName, password}).pipe(shareReplay());
+    let userRSObservable = this.http.post<userRS>('http://localhost:8080/api/v1/auth/login', {userName, password})
+      .pipe(shareReplay());
     userRSObservable.subscribe(data=>{
       this.setSession(data)
     })
@@ -35,10 +36,10 @@ export class AuthService {
     // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
   }
 
-  logout() {
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-  }
+  // logout() {
+  //   localStorage.removeItem("id_token");
+  //   localStorage.removeItem("expires_at");
+  // }
 
   public isLoggedIn() {
     return moment().isBefore(this.getExpiration());
