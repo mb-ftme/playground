@@ -40,7 +40,7 @@ export class LoginComponentComponent implements OnInit {
     }
 
     else {
-      alert("wrong number")
+      alert("همه فیلد ها پر شوند")
       this.router.navigate(['/login'])
     }
 

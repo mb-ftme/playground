@@ -4,6 +4,7 @@ import {LoginComponentComponent} from "./login-component/login-component.compone
 import {FormListComponent} from "./form-list/form-list.component";
 
 const routes: Routes = [
+  {path:'',component:LoginComponentComponent},
   { path: 'login', component: LoginComponentComponent },
   { path: 'form', component: FormListComponent },
 ];
