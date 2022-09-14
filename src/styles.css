@@ -974,7 +974,7 @@ footer ul li{
     text-align:center
   }
   .product-box{
-    text-align:centerg
+    text-align:center
   }
   .page-container{
     position:relative;
@@ -1026,7 +1026,7 @@ footer ul li{
     border:1px solid #205b8d;
     float:left;
     margin-top:9px;
-    padding-left:12px
+    /*padding-left:12px*/
   }
   .header-mobile .header-mobile-bar{
     padding:6px 0;
@@ -1034,4 +1034,180 @@ footer ul li{
     border:0;
     padding:8px 0
   }
+}
+body {
+  background: #c2c3cf2e;
+  font-family: Assistant, sans-serif;
+  display: flex;
+  /*min-height: 90vh;*/
+}
+.login {
+  margin: 250px;
+  color: white;
+  background:#136a8a;
+  background:
+    -webkit-linear-gradient(to right, #267871, #136a8a);
+  background:
+    linear-gradient(to right, #267871, #136a8a);
+  /*margin: auto;*/
+  box-shadow:
+    0px 2px 10px rgba(0,0,0,0.2),
+    0px 10px 20px rgba(0,0,0,0.3),
+    0px 30px 60px 1px rgba(0,0,0,0.5);
+  border-radius: 50px;
+  padding: 100px;
+  position: center;
+}
+.login .head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .head .company {
+  padding: 30px;
+  font-size: 2.2em;
+  color: rgba(255, 255, 255, 0.83);
+}
+.login .msg {
+  text-align: center;
+}
+.login .form input[type=text].text {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px white;
+  width: 100%;
+  float: right;
+  color: white;
+  font-size: 1em;
+  outline: none;
+}
+.login .form .text::placeholder {
+  color: #D3D3D3;
+  float: right;
+  glyph-orientation-vertical: auto;
+}
+.login .form input[type=password].password {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px white;
+  width: 100%;
+  color: white;
+  font-size: 1em;
+  outline: none;
+  margin-bottom: 20px;
+  float: right;
+  margin-top: 20px;
+}
+.login .form .password::placeholder {
+  color: #D3D3D3;
+  float: right;
+}
+.login .form .btn-login {
+  background: #05465ed7;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0px 0px 0px 2px white;
+  border-radius: 20px;
+  margin: 40px;
+  margin-top: 10px;
+  padding: 5px 2em;
+  transition: 0.5s;
+  float: left;
+}
+.login .form .btn-login:hover {
+  background: white;
+  color: dimgray;
+  transition: 0.5s;
+}
+.login .forgot {
+  text-decoration: none;
+  color: white;
+  float: right;
+}
+
+
+
+body-f {
+  background: #05507fdc;
+  font-family: Assistant, sans-serif;
+  display: flex;
+  min-height: 90vh;
+}
+.login-f {
+  color: #05507fdc;
+
+  background: #D3D3D3;
+  margin: auto;
+  box-shadow:
+    0px 2px 10px rgba(0,0,0,0.2),
+    0px 10px 20px rgba(0,0,0,0.3),
+    0px 30px 60px 1px rgba(0,0,0,0.5);
+  border-radius: 50px;
+  padding: 150px;
+  width: 800px;
+}
+.login .head-f {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .head .company-f {
+  font-size: 2.2em;
+}
+.login .msg-f {
+  text-align: center;
+}
+.login .form input[type=text].text-f {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px #05507fdc;
+  width: 100%;
+  float: right;
+  color: #05507fdc;
+  font-size: 1em;
+  outline: none;
+}
+.login .form .text-f::placeholder {
+  color: #D3D3D3;
+
+  float: right;
+  glyph-orientation-vertical: auto;
+}
+.login .form input[type=password].password-f {
+  border: none;
+  background: none;
+  box-shadow: 0px 2px 0px 0px #05507fdc;
+  width: 100%;
+  color: #05507fdc;
+  font-size: 1em;
+  outline: none;
+  margin-bottom: 20px;
+  float: right;
+  margin-top: 20px;
+}
+.login .form .password-f::placeholder {
+  color: #D3D3D3;
+  float: right;
+}
+.login .form .btn-login-f {
+  background: #05465ed7;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0px 0px 0px 2px white;
+  border-radius: 20px;
+  margin: 40px;
+  margin-top: 30px;
+  padding: 5px 2em;
+  transition: 0.5s;
+  float: left;
+}
+.login .form .btn-login-f:hover {
+  background: white;
+  color: dimgray;
+  transition: 0.5s;
+}
+.login .forgot-f {
+  text-decoration: none;
+  color: white;
+  float: right;
 }

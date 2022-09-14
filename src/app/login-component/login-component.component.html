@@ -1,17 +1,23 @@
-<form routerLink="form" [formGroup]="form">
-  <fieldset>
-    <legend>Login</legend>
-    <div class="form-field">
-      <label>UserName:</label>
-      <input  name="userName" formControlName="userName" >
-    </div>
-    <div class="form-field">
-      <label>Password:</label>
-      <input name="password" formControlName="password"
-             type="password">
-    </div>
-  </fieldset>
-  <div class="form-buttons">
-    <button   class="btn" (click)="login()">Login</button>
+
+
+<html lang="en" >
+<section class='login' id='login'>
+  <div class='head'>
+    <h1 class='company'>چاپار</h1>
   </div>
-</form>
+
+
+
+<!--  <div routerLink="form" class="form">-->
+    <form  routerLink="form" class="form"  [formGroup]="form">
+      <input name="userName" formControlName="userName" type="text"
+             placeholder='نام کاربری' class='text' id='username' required><br>
+      <input name="password" formControlName="password" type="password"
+             placeholder='کلمه عبور' class='password'><br>
+      <button routerLink="form" class='btn-login'  (click)="login()">ورود</button>
+
+
+    </form>
+<!--  </div>-->
+</section>
+
