@@ -1,9 +1,9 @@
 import * as moment from "moment";
 import {Injectable} from "@angular/core";
 import {userRQ} from "./models/userRQ";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {userRS} from "./models/userRS";
-import {shareReplay} from "rxjs";
+import {Observable, shareReplay} from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -28,26 +28,24 @@ export class AuthService {
   }
 
   // @ts-ignore
-  private setSession(authResult:userRS) {
+  public setSession(authResult:userRS) {
     // const expiresAt = moment().add(authResult.expiresIn,'second');
 
     localStorage.setItem('id_token', authResult.token);
     console.log(authResult.token)
-    // localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+    //
   }
 
-  // logout() {
-  //   localStorage.removeItem("id_token");
-  //   localStorage.removeItem("expires_at");
-  // }
+
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
+    // return moment().isBefore(this.getExpiration());
+    // if ( localStorage.getItem("id_token").includes(this.setSession())){
 
-  isLoggedOut() {
-    return !this.isLoggedIn();
-  }
+      return true;
+     }
+
+
 
   getExpiration() {
     const expiration = localStorage.getItem("expires_at");
@@ -55,4 +53,23 @@ export class AuthService {
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
+
+
+
+  /////////////////////new upload
+  // upload(file: File): Observable<HttpEvent<any>> {
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', file);
+  //   const req = new HttpRequest('POST', `'http://localhost:8080/api/v1/auth/login'`, formData, {
+  //     reportProgress: true,
+  //     responseType: 'json'
+  //   });
+  //
+  //   return this.http.request(req);
+  //
+  //
+  // }
 }
+
+
+
