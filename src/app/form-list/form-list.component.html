@@ -1,20 +1,21 @@
-<section class="sample-app-content">
 
-  <form [formGroup]="restForm" (ngSubmit)="onSubmit()">
-    <p>
-      <label>متن پیام:</label>
-      <input type="text" formControlName="message">
-    </p>
-    <p>
-      <label>کدملی:</label>
-      <input type="text" formControlName="nationalCode">
-    </p>
-    <p>
-      <button class="btn" type="submit">ثبت</button>
-    </p>
-<p>
-  {{myhtmlValue}}
-</p>
+
+<section class='login-f' >
+  <div class="head-f">
+    <h1 class="company-f">ارسال پیامک</h1>
+  </div>
+
+    <form  class="form" [formGroup]="restForm">
+    <input  class="text" name="message" formControlName="message"
+           placeholder='نام کاربری'  ><br>
+    <input class="password" name="nationalCode" formControlName="nationalCode"
+           placeholder='کلمه عبور' ><br>
+    <button class='btn-login-f' (click)="onSubmit()">ارسال</button>
+
 
   </form>
+
+  {{myhtmlValue}}
+
+
 </section>
