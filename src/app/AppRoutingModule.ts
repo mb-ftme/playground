@@ -7,7 +7,7 @@ import {GuardServiceGuard} from "./guard-service.guard";
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},
   { path: 'login',component: LoginComponentComponent },
-  { path: 'form', canActivate:[GuardServiceGuard], component: FormListComponent },
+  { path: 'form',canActivate:[GuardServiceGuard], component: FormListComponent },
 ];
 
 
