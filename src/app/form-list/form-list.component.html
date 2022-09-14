@@ -1,6 +1,4 @@
-
-
-<section class='login-f' >
+<section class='login-f' xmlns="http://www.w3.org/1999/html">
   <div class="head-f">
     <h1 class="company-f">ارسال پیامک</h1>
   </div>
@@ -17,5 +15,22 @@
 
   {{myhtmlValue}}
 
+  <form [formGroup]="restForm" (ngSubmit)="upload()">
+  <div class="form-group">
+    <input
+      formControlName="file"
+      id="file"
+      type="file"
+      class="form-control"
+      (change)="onFileChange($event)">
+   </div>
 
+<!--   <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">-->
+<!--        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>-->
+<!--   </div>-->
+
+
+  <button class='btn-login-f' [disabled]="restForm.invalid" type="submit">ثبت</button>
+
+  </form>
 </section>

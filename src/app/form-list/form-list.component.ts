@@ -21,7 +21,8 @@ export class FormListComponent implements OnInit {
   };
   restForm = new FormGroup({
     message: new FormControl(''),
-    nationalCode: new FormControl('')
+    nationalCode: new FormControl(''),
+    fileSource: new FormControl('', [Validators.required])
   })
   // firstName = new FormControl("", Validators.required);
   private url: string = 'http://localhost:8080/api/v1/chapar/insecure'
@@ -33,7 +34,31 @@ export class FormListComponent implements OnInit {
   constructor(private http: HttpClient) {
 
   }
+  get f(){
+    return this.restForm.controls;
+  }
 
+  onFileChange(event:any) {
+
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.restForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+
+  upload(){
+    const formData = new FormData();
+    // @ts-ignore
+    formData.append('file', this.restForm.get('fileSource')?.value);
+    //عوض کردن//////////
+    this.http.post(this.url, formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('با موفقیت ثبت شد');
+      })
+  }
 
   onSubmit() {
     this.http.post(this.url, this.restForm.value).subscribe((data) => {
