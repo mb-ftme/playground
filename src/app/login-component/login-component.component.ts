@@ -32,14 +32,16 @@ export class LoginComponentComponent implements OnInit {
         .subscribe(
           value => {
             if ( value.token!=null) {
+              console.log("==============================")
+              console.log("token")
+              console.log(value.token)
+              console.log("==============================")
               this.router.navigate(['/form'])
-            }else {
-              localStorage.removeItem("id_token")
-              localStorage.clear()
-              localStorage.setItem("id_token","")
-              this.router.navigate(['/login'])
             }
-
+          },
+          error => {
+            localStorage.setItem("id_token","invalid")
+            this.router.navigate(['/login'])
           }
         );
 
