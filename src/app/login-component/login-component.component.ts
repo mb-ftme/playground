@@ -21,7 +21,7 @@ export class LoginComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    localStorage.setItem("id_token","invalid")
   }
 
   login() {
