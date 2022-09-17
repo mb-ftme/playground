@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -8,7 +8,7 @@ import {
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {AuthService} from "./AuthService";
 
 
@@ -17,15 +17,16 @@ import {AuthService} from "./AuthService";
 })
 export class GuardServiceGuard implements CanActivate {
 
-  constructor(public authService:AuthService,public router:Router,) {}
+  constructor(public authService: AuthService, public router: Router,) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot):
-    Observable<boolean>| boolean {
+    Observable<boolean> | boolean {
 
-      return   localStorage.getItem("id_token")!=="invalid"
-
-
+    let result = localStorage.getItem("id_token") !== `invalid`;
+    if (!result) this.router.navigate(['/login'])
+    return result;
 
   }
 
