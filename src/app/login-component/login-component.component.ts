@@ -9,7 +9,7 @@ import {AuthService} from "../AuthService";
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent implements OnInit {
-  private url: string = 'http://localhost:8080/api/v1/auth/login'
+  private url: string = 'http://localhost:4558/api/v1/auth/login'
   form!:FormGroup;
   constructor(private fb:FormBuilder,
               private authService: AuthService,

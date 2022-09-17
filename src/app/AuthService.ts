@@ -1,7 +1,7 @@
 import * as moment from "moment";
 import {Injectable} from "@angular/core";
 import {userRQ} from "./models/userRQ";
-import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {userRS} from "./models/userRS";
 import {Observable, shareReplay} from "rxjs";
 
@@ -15,7 +15,11 @@ export class AuthService {
 
   login(userName:string, password:string ) {
 
-    let userRSObservable = this.http.post<userRS>('http://localhost:8080/api/v1/auth/login', {userName, password})
+    let userRSObservable = this.http.post<userRS>('http://localhost:4558/api/v1/auth/login', {userName, password},
+      {
+        headers:  new HttpHeaders({ 'No-Auth': 'True' })
+      }
+      )
       .pipe(shareReplay());
     userRSObservable.subscribe(data=>{
       console.log(data+"444444")
