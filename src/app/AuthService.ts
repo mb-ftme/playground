@@ -7,6 +7,7 @@ import {Observable, shareReplay} from "rxjs";
 
 @Injectable()
 export class AuthService {
+  url!:"";
 
   constructor(private http: HttpClient) {
 
@@ -17,6 +18,7 @@ export class AuthService {
     let userRSObservable = this.http.post<userRS>('http://localhost:8080/api/v1/auth/login', {userName, password})
       .pipe(shareReplay());
     userRSObservable.subscribe(data=>{
+      console.log(data+"444444")
       this.setSession(data)
     })
     return userRSObservable;
@@ -39,19 +41,16 @@ export class AuthService {
 
 
   public isLoggedIn() {
-    // return moment().isBefore(this.getExpiration());
-    // if ( localStorage.getItem("id_token").includes(this.setSession())){
-
-      return true;
-     }
+   return true;
 
 
+  }
 
-  getExpiration() {
-    const expiration = localStorage.getItem("expires_at");
-    // @ts-ignore
-    const expiresAt = JSON.parse(expiration);
-    return moment(expiresAt);
+
+  getFile()
+  {
+    return this.http.get(this.url);
+
   }
 
 
@@ -63,7 +62,7 @@ export class AuthService {
   //   const req = new HttpRequest('POST', `'http://localhost:8080/api/v1/auth/login'`, formData, {
   //     reportProgress: true,
   //     responseType: 'json'
-  //   });
+  //   });v
   //
   //   return this.http.request(req);
   //

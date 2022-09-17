@@ -5,6 +5,7 @@ import {ChaparRQ} from "../models/chaparRQ";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable} from "rxjs";
 import {chaparRES} from "../models/chaparRES";
+import {AuthService} from "../AuthService";
 
 @Component({
   selector: 'app-form-list',
@@ -31,7 +32,7 @@ export class FormListComponent implements OnInit {
 
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private auth:AuthService) {
 
   }
   get f(){
@@ -50,6 +51,18 @@ export class FormListComponent implements OnInit {
 
   upload(){
     const formData = new FormData();
+    //////////
+    // @ts-ignore
+    this.auth.getFile<any>().subscribe((data=> {
+
+       alert('با موفقیت ثبت شد');
+        console.log(data)
+
+      } )
+
+
+    )
+
     // @ts-ignore
     formData.append('file', this.restForm.get('fileSource')?.value);
     //عوض کردن//////////

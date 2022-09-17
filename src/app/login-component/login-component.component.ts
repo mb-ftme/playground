@@ -27,19 +27,27 @@ export class LoginComponentComponent implements OnInit {
   login() {
 
     const val = this.form.value;
-    if (val.userName && val.password //و اسم و رمز درست بود
-    ) {
+    if (val.userName && val.password) {
       this.authService.login(val.userName, val.password)
         .subscribe(
-          () => {
-            console.log("User is logged in");
+          value => {
+            if ( value.token!=null) {
+              this.router.navigate(['/form'])
+            }else {
+              localStorage.removeItem("id_token")
+              localStorage.clear()
+              localStorage.setItem("id_token","")
+              this.router.navigate(['/login'])
+            }
 
           }
         );
-        this.router.navigate(['/form'])
+
     }
 
+
     else {
+      localStorage.clear()
       alert("همه فیلد ها پر شوند")
       this.router.navigate(['/login'])
     }

@@ -23,10 +23,11 @@ export class GuardServiceGuard implements CanActivate {
               state: RouterStateSnapshot):
     Observable<boolean>| boolean {
 
+        console.log(localStorage.getItem("id_token"))
 
      if (!this.authService.isLoggedIn()) {
        this.router.navigate(['/form']);
-       return false;
+       return true;
      }
 
       // @ts-ignore
