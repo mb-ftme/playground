@@ -5,7 +5,7 @@ import {FormListComponent} from "./form-list/form-list.component";
 import {GuardServiceGuard} from "./guard-service.guard";
 
 const routes: Routes = [
-  {path:'',component:LoginComponentComponent},
+  { path: '',   redirectTo: '/form', pathMatch: 'full' },
   { path: 'login',component: LoginComponentComponent },
   { path: 'form',canActivate:[GuardServiceGuard], component: FormListComponent },
 ];
