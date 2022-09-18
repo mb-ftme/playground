@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-
-import {ChaparRQ} from "../models/chaparRQ";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {map, Observable} from "rxjs";
-import {chaparRES} from "../models/chaparRES";
-import {AuthService} from "../AuthService";
+import {HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders} from '@angular/common/http';
+// import {saveAs} from 'file-saver';
+import {ChaparRQ} from '../models/chaparRQ';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {map, Observable} from 'rxjs';
+import {chaparRES} from '../models/chaparRES';
+import {AuthService} from '../AuthService';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-form-list',
@@ -13,7 +14,9 @@ import {AuthService} from "../AuthService";
   styleUrls: ['./form-list.component.css']
 })
 
-export class FormListComponent implements OnInit {
+export class FormListComponent  {
+  filenames: string[] = [];
+  fileStatus = {status: '', requestType: '', percent: 0};
 
 
   myhtmlValue!: String;
@@ -24,66 +27,27 @@ export class FormListComponent implements OnInit {
     message: new FormControl(''),
     nationalCode: new FormControl(''),
     fileSource: new FormControl('', [Validators.required])
-  })
-  // firstName = new FormControl("", Validators.required);
-  private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request'
+  });
+  private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request';
 
-  ngOnInit(): void {
 
-  }
 
-  constructor(private http: HttpClient,private auth:AuthService) {
+  constructor(private http: HttpClient, private auth: AuthService) {
 
   }
-  get f(){
-    return this.restForm.controls;
-  }
-
-  onFileChange(event:any) {
-
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.restForm.patchValue({
-        fileSource: file
-      });
-    }
-  }
-
-  upload(){
-    const formData = new FormData();
-    //////////
-    // @ts-ignore
-    this.auth.getFile<any>().subscribe((data=> {
-
-       alert('با موفقیت ثبت شد');
-        console.log(data)
-
-      } )
 
 
-    )
-
-    // @ts-ignore
-    formData.append('file', this.restForm.get('fileSource')?.value);
-    //عوض کردن//////////
-    this.http.post(this.url, formData)
-      .subscribe(res => {
-        console.log(res);
-        alert('با موفقیت ثبت شد');
-      })
-  }
 
   onSubmit() {
     this.http.post(this.url, this.restForm.value).subscribe((data) => {
-      console.warn(data)
-    })
-    let sta = this.getResponse(<ChaparRQ>this.restForm.value).subscribe((data) => {
-      console.log(sta)
+      console.warn(data);
+    });
+    let sta = this.getResponse(<ChaparRQ> this.restForm.value).subscribe((data) => {
+      console.log(sta);
       // @ts-ignore
       this.myhtmlValue = data;
-    })
+    });
     // @ts-ignore
-    console.log(seta)
   }
 
   getResponse(Ch: ChaparRQ): Observable<String> {
@@ -92,4 +56,60 @@ export class FormListComponent implements OnInit {
 
 
   }
+
+
+  public onUploadFiles(files: File[]): void {
+
+    const formData = new FormData();
+    for (const file of files) {
+      formData.append('files', file, file.name);
+    }
+    this.auth.upload(formData).subscribe(
+      event => {
+        console.log(event);
+        this.resportProgress(event);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
+
+  private resportProgress(httpEvent: HttpEvent<string[] | Blob>): void {
+    switch (httpEvent.type) {
+      case HttpEventType.UploadProgress:
+        this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Uploading... ');
+        break;
+      case HttpEventType.DownloadProgress:
+        this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Downloading... ');
+        break;
+      case HttpEventType.ResponseHeader:
+        console.log('Header returned', httpEvent);
+        break;
+      case HttpEventType.Response:
+        if (httpEvent.body instanceof Array) {
+          this.fileStatus.status = 'done';
+          for (const filename of httpEvent.body) {
+            this.filenames.unshift(filename);
+          }
+        } else {
+          saveAs(new File([httpEvent.body!], httpEvent.headers.get('File-Name')!,
+            {type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`}));
+
+        }
+        this.fileStatus.status = 'done';
+        break;
+      default:
+        console.log(httpEvent);
+        break;
+
+    }
+  }
+
+  private updateStatus(loaded: number, total: number, requestType: string): void {
+    this.fileStatus.status = 'progress';
+    this.fileStatus.requestType = requestType;
+    this.fileStatus.percent = Math.round(100 * loaded / total);
+  }
+
 }

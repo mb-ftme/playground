@@ -15,22 +15,38 @@
 
   {{myhtmlValue}}
 
-  <form [formGroup]="restForm" (ngSubmit)="upload()">
-  <div class="form-group">
-    <input
-      formControlName="file"
-      id="file"
-      type="file"
-      class="form-control"
-      (change)="onFileChange($event)">
-   </div>
+  <div class="container" style="margin-top: 20px;">
+    <div class="panel panel-default">
 
-<!--   <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">-->
-<!--        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>-->
-<!--   </div>-->
+      </div><br>
+      <div class="panel-body">
+
+        <div *ngIf="fileStatus.status==='progress'">
+          <div class="progress">
+            <div [style.width.%]="fileStatus.percent" class="progress-bar progress-bar-animated bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+              {{ fileStatus.requestType }} {{ fileStatus.percent }}
+            </div>
+          </div>
+        </div> <hr>
+
+        <form enctype="multipart/form-data">
+
+
+                <input  type="file" (change)="onUploadFiles($any($event.target).files)" name="files" multiple class="form-control" />
+
+
+
+        </form>
+
+        <br>
+
+
+      </div>
+    </div>
+
+
 
 
   <button class='btn-login-f' [disabled]="restForm.invalid" type="submit">ثبت</button>
 
-  </form>
 </section>

@@ -8,7 +8,8 @@ import {Observable, shareReplay} from "rxjs";
 
 @Injectable()
 export class AuthService {
-  // url!:"";
+
+   sever:string="http://192.168.16.171:4558";
    url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
 
   constructor(private http: HttpClient) {
@@ -46,34 +47,15 @@ export class AuthService {
 
 
 
-  public isLoggedIn() {
-   return true;
 
-
+  upload(formData: FormData): Observable<HttpEvent<string[]>> {
+    return this.http.post<string[]>(`${this.sever}/resource/upload`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
 
-  getFile()
-  {
-    return this.http.get(this.url);
-
-  }
-
-
-
-  /////////////////////new upload
-  // upload(file: File): Observable<HttpEvent<any>> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('file', file);
-  //   const req = new HttpRequest('POST', `'http://localhost:8080/api/v1/auth/login'`, formData, {
-  //     reportProgress: true,
-  //     responseType: 'json'
-  //   });v
-  //
-  //   return this.http.request(req);
-  //
-  //
-  // }
 }
 
 
