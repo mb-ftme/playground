@@ -111,5 +111,15 @@ export class FormListComponent  {
     this.fileStatus.requestType = requestType;
     this.fileStatus.percent = Math.round(100 * loaded / total);
   }
-
+  onDownloadFile(filename: string): void {
+    this.auth.download(filename).subscribe(
+      event => {
+        console.log(event);
+        this.resportProgress(event);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
+  }
 }
