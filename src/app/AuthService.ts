@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   // @ts-ignore
+  private loadurl: string=`${this.sever}/load`;
   public setSession(authResult:userRS) {
     // const expiresAt = moment().add(authResult.expiresIn,'second');
 
@@ -44,8 +45,6 @@ export class AuthService {
     console.log(authResult.token)
     //
   }
-
-
 
 
   upload(formData: FormData): Observable<HttpEvent<string[]>> {
@@ -60,6 +59,13 @@ export class AuthService {
       observe: 'events',
       responseType: 'blob'
     });
+  }
+
+  load():Observable<any>{
+    console.log("///////////////////////////////////////////////")
+
+    return this.http.get<any>("http://192.168.16.171:4558/load")
+
   }
 
 }

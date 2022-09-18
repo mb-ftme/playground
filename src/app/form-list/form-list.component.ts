@@ -122,4 +122,11 @@ export class FormListComponent  {
       }
     );
   }
+
+
+  load(){
+    // console.log("///////////////////////////////////////////////")
+    this.auth.load()
+  }
+
 }
