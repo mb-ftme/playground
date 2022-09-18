@@ -9,7 +9,7 @@ import {AuthService} from "../AuthService";
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent implements OnInit {
-  private url: string = 'http://localhost:4558/api/v1/auth/login'
+  private url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
   form!:FormGroup;
   constructor(private fb:FormBuilder,
               private authService: AuthService,
@@ -21,35 +21,25 @@ export class LoginComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.setItem("id_token","invalid")
+
   }
 
   login() {
 
     const val = this.form.value;
-    if (val.userName && val.password) {
+    if (val.userName && val.password //و اسم و رمز درست بود
+    ) {
       this.authService.login(val.userName, val.password)
         .subscribe(
-          value => {
-            if ( value.token!=null) {
-              console.log("==============================")
-              console.log("token")
-              console.log(value.token)
-              console.log("==============================")
-              this.router.navigate(['/form'])
-            }
-          },
-          error => {
-            localStorage.setItem("id_token","invalid")
-            this.router.navigate(['/login'])
+          () => {
+            console.log("User is logged in");
+
           }
         );
-
+        this.router.navigate(['/form'])
     }
 
-
     else {
-      localStorage.clear()
       alert("همه فیلد ها پر شوند")
       this.router.navigate(['/login'])
     }

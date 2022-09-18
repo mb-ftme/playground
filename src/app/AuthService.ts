@@ -5,9 +5,11 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from "@angular/common/h
 import {userRS} from "./models/userRS";
 import {Observable, shareReplay} from "rxjs";
 
+
 @Injectable()
 export class AuthService {
-  url!:"";
+  // url!:"";
+   url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
 
   constructor(private http: HttpClient) {
 
@@ -15,7 +17,7 @@ export class AuthService {
 
   login(userName:string, password:string ) {
 
-    let userRSObservable = this.http.post<userRS>('http://localhost:4558/api/v1/auth/login', {userName, password},
+    let userRSObservable = this.http.post<userRS>(this.url, {userName, password},
       {
         headers:  new HttpHeaders({ 'No-Auth': 'True' })
       }

@@ -11,15 +11,10 @@
 <!--  <div routerLink="form" class="form">-->
     <form class="form"  [formGroup]="form">
       <input name="userName" formControlName="userName" type="text"
-             placeholder='نام کاربری' class='text' id='username' required>
-      <div class="invalid-feedback" *ngIf="form.invalid ">
-        <p *ngIf="form.invalid">Name is required</p>
-      </div>
-      <br>
+             placeholder='نام کاربری' class='text' id='username' required><br>
       <input name="password" formControlName="password" type="password"
-             placeholder='کلمه عبور' class='password'>
-      <br>
-      <button routerLink="form" class='btn-login' (click)="login()">ورود</button>
+             placeholder='کلمه عبور' class='password'><br>
+      <button routerLink="form" class='btn-login'  (click)="login()">ورود</button>
 
 
     </form>

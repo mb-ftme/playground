@@ -26,7 +26,7 @@ export class FormListComponent implements OnInit {
     fileSource: new FormControl('', [Validators.required])
   })
   // firstName = new FormControl("", Validators.required);
-  private url: string = 'http://localhost:8080/api/v1/chapar/insecure'
+  private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request'
 
   ngOnInit(): void {
 
