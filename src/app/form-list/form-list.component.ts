@@ -91,7 +91,8 @@ export class FormListComponent {
             this.filenames.unshift(filename);
           }
         } else {
-          saveAs(new File([httpEvent.body!], httpEvent.headers.get('File-Name')!,
+          let fileName = httpEvent.headers.get('File-Name')!;
+          saveAs(new File([httpEvent.body!], "fileName.csv",
             {type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`}));
 
         }
@@ -110,17 +111,15 @@ export class FormListComponent {
     this.fileStatus.percent = Math.round(100 * loaded / total);
   }
 
-  onDownloadFile(filename: string): void {
-    this.auth.download(filename).subscribe(
+  onDownloadFile(): void {
+    this.auth.download().subscribe(
       event => {
         console.log(event);
         this.resportProgress(event);
-        alert("okkk")
       },
       (error: HttpErrorResponse) => {
         console.log(error);
         alert(error)
-        alert("noook")
 
       }
     );

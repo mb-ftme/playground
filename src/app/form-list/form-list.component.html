@@ -33,6 +33,7 @@
 
 
                 <input  type="file" (change)="onUploadFiles($any($event.target).files)" name="files" multiple class="form-control" />
+          <button class='btn-login-f' (click)="onDownloadFile() ">دانلود</button>
 
 
 
@@ -51,14 +52,13 @@
 
   <div  class="js-upload-finished">
 
-    <h3>Processed files</h3>
-    <div *ngFor="let filename of filenames" class="list-group">
-      <button (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
-        {{ filename }}
-        <a class="alert-success float-right">Download</a>
-      </button><br>
+<!--    <div *ngFor="let filename of filenames" class="list-group">-->
+<!--      <button (click)="onDownloadFile()" class="list-group-item list-group-item-success" style="cursor: pointer;">-->
+<!--        {{ filename }}-->
+<!--        <a class="alert-success float-right">Download</a>-->
+<!--      </button><br>-->
 
-    </div>
+<!--    </div>-->
   </div>
 
 

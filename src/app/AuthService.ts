@@ -53,8 +53,8 @@ export class AuthService {
       observe: 'events'
     });
   }
-  download(filename: string) {
-   filename==="result.csv"
+  download() {
+   let filename="result.csv"
     return this.http.get(`${this.sever}/resource/download/${filename}/`, {
       reportProgress: true,
       observe: 'events',
