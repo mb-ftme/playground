@@ -11,19 +11,16 @@ import {AuthService} from "../AuthService";
 export class LoginComponentComponent implements OnInit {
   private url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
   form!:FormGroup;
-  constructor(private fb:FormBuilder,
-              private authService: AuthService,
-              private router: Router) {
-    this.form = this.fb.group({
+  constructor(private fb:FormBuilder, private authService: AuthService, private router: Router) {
+      this.form = this.fb.group({
       userName: ['',Validators.required],
       password: ['',Validators.required]
     });
   }
 
   ngOnInit(): void {
-
   }
-
+//و این تابع بنظر اشتباه می ایند
   login() {
 
     const val = this.form.value;

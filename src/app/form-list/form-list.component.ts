@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders} from '@angular/common/http';
-// import {saveAs} from 'file-saver';
 import {ChaparRQ} from '../models/chaparRQ';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, Observable} from 'rxjs';
@@ -17,46 +16,41 @@ import {saveAs} from 'file-saver';
 export class FormListComponent {
   filenames: string[] = [];
   fileStatus = {status: '', requestType: '', percent: 0};
-
-
   myhtmlValue!: String;
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'}),
-  };
-  restForm = new FormGroup({
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+
+    restForm = new FormGroup({
     message: new FormControl(''),
     nationalCode: new FormControl(''),
     fileSource: new FormControl('', [Validators.required])
   });
-  private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request';
+      private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request';
 
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+      constructor(private http: HttpClient, private auth: AuthService) {
 
   }
 
 
-  onSubmit() {
+      onSubmit() {
     this.http.post(this.url, this.restForm.value).subscribe((data) => {
       console.warn(data);
     });
     let sta = this.getResponse(<ChaparRQ> this.restForm.value).subscribe((data) => {
       console.log(sta);
-      // @ts-ignore
       this.myhtmlValue = data;
     });
-    // @ts-ignore
+
   }
 
-  getResponse(Ch: ChaparRQ): Observable<String> {
-    return this.http.post<chaparRES>(this.url, Ch, this.httpOptions)
+      getResponse(Ch: ChaparRQ): Observable<String> {
+      return this.http.post<chaparRES>(this.url, Ch, this.httpOptions)
       .pipe(map(value => value.status));
 
 
   }
 
-
-  public onUploadFiles(files: File[]): void {
+      public onUploadFiles(files: File[]): void {
 
     const formData = new FormData();
     for (const file of files) {
@@ -73,7 +67,7 @@ export class FormListComponent {
     );
   }
 
-  private resportProgress(httpEvent: HttpEvent<string[] | Blob>): void {
+      private resportProgress(httpEvent: HttpEvent<string[] | Blob>): void {
     switch (httpEvent.type) {
       case HttpEventType.UploadProgress:
         this.updateStatus(httpEvent.loaded, httpEvent.total!, 'Uploading... ');
@@ -105,13 +99,13 @@ export class FormListComponent {
     }
   }
 
-  private updateStatus(loaded: number, total: number, requestType: string): void {
+      private updateStatus(loaded: number, total: number, requestType: string): void {
     this.fileStatus.status = 'progress';
     this.fileStatus.requestType = requestType;
     this.fileStatus.percent = Math.round(100 * loaded / total);
   }
 
-  onDownloadFile(): void {
+      onDownloadFile(): void {
     this.auth.download().subscribe(
       event => {
         console.log(event);
@@ -125,11 +119,7 @@ export class FormListComponent {
     );
   }
 
-
-
-
-
-  load() {
+      load() {
     // console.log("///////////////////////////////////////////////")
     this.auth.load()
   }
