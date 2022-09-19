@@ -50,12 +50,14 @@
   <button class='btn-login-f' (click)="load() ">آغاز فرایند ارسال پیامک</button>
 
   <div  class="js-upload-finished">
+
     <h3>Processed files</h3>
     <div *ngFor="let filename of filenames" class="list-group">
-      <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
+      <button (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success" style="cursor: pointer;">
         {{ filename }}
         <a class="alert-success float-right">Download</a>
-      </a><br>
+      </button><br>
+
     </div>
   </div>
 

@@ -14,7 +14,7 @@ import {saveAs} from 'file-saver';
   styleUrls: ['./form-list.component.css']
 })
 
-export class FormListComponent  {
+export class FormListComponent {
   filenames: string[] = [];
   fileStatus = {status: '', requestType: '', percent: 0};
 
@@ -31,11 +31,9 @@ export class FormListComponent  {
   private url: string = 'http://192.168.16.171:4558/api/v1/chapar/send-request';
 
 
-
   constructor(private http: HttpClient, private auth: AuthService) {
 
   }
-
 
 
   onSubmit() {
@@ -111,22 +109,32 @@ export class FormListComponent  {
     this.fileStatus.requestType = requestType;
     this.fileStatus.percent = Math.round(100 * loaded / total);
   }
+
   onDownloadFile(filename: string): void {
     this.auth.download(filename).subscribe(
       event => {
         console.log(event);
         this.resportProgress(event);
+        alert("okkk")
       },
       (error: HttpErrorResponse) => {
         console.log(error);
+        alert(error)
+        alert("noook")
+
       }
     );
   }
 
 
-  load(){
+
+
+
+  load() {
     // console.log("///////////////////////////////////////////////")
     this.auth.load()
   }
+
+
 
 }

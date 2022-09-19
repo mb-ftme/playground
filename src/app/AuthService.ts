@@ -53,20 +53,30 @@ export class AuthService {
       observe: 'events'
     });
   }
-  download(filename: string): Observable<HttpEvent<Blob>> {
+  download(filename: string) {
+   filename==="result.csv"
     return this.http.get(`${this.sever}/resource/download/${filename}/`, {
       reportProgress: true,
       observe: 'events',
       responseType: 'blob'
     });
+
   }
 
-  load():Observable<any>{
+
+
+
+
+  load(){
     console.log("///////////////////////////////////////////////")
-
     return this.http.get<any>("http://192.168.16.171:4558/load")
+      .subscribe(value =>{ console.log(value)
+        alert(value)
+        },
+          error => console.log(error))
 
   }
+
 
 }
 
