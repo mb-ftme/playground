@@ -5,7 +5,9 @@ import {BehaviorSubject, Observable, shareReplay, tap} from "rxjs";
 import {userRQ} from "./models/userRQ";
 
 
-@Injectable()
+@Injectable({
+  providedIn:"root"
+})
 export class AuthService {
    sever:string="http://192.168.16.171:4558";
    url: string = 'http://localhost:8080/api/v1/auth/login'
@@ -14,13 +16,8 @@ export class AuthService {
   public lg=new BehaviorSubject(false);
   constructor(public http:HttpClient) { }
   login(rq:userRQ){
-    return this.http.post(`http://localhost:8080/api/v1/auth/login`
-      ,rq).pipe(
-      tap(()=>{
-          this.lg.next(true);
-        }
-      )
-    )
+    return this.http.post<userRS>('http://localhost:8080/api/v1/auth/login'
+      ,rq)
 
   }
 

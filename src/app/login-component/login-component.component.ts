@@ -31,8 +31,14 @@ export class LoginComponentComponent  {
       return;
     }
 
-    this.auth.login(new userRQ(this.form.value.password!, this.form.value.userName!)).subscribe((res) => {
-      console.log(res)
+    let userRQ1 = new userRQ(this.form.value.password!, this.form.value.userName!);
+    this.auth.login(userRQ1).subscribe((res) => {
+      console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnn")
+      console.log(userRQ1);
+      console.log(res.token+"!!!!!!!!!!!!!!!!!!!!!")
+      localStorage.setItem("id_token",res.token)
+      console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
     })
 
 

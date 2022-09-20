@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpRequest} from "@angular/common/http";
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FormListComponent } from './form-list/form-list.component';
@@ -11,6 +11,8 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import {AuthService} from "./AuthService";
 import {AppRoutingModule} from "./AppRoutingModule";
 import {Router, RouterModule} from "@angular/router";
+import {AuthInterceptor} from "./auth.interceptor";
+import { TestComponent } from './test/test.component';
 
 
 
@@ -19,6 +21,7 @@ import {Router, RouterModule} from "@angular/router";
     AppComponent,
     LoginComponentComponent,
     FormListComponent,
+    TestComponent,
 
 
   ],
@@ -32,8 +35,9 @@ import {Router, RouterModule} from "@angular/router";
 
 
   ],
-
-  providers: [AuthService],
+//provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true
+//   }
+  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
