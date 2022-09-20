@@ -40,11 +40,14 @@ import {AuthService} from "./AuthService";
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):Observable<boolean> | boolean {
 
-    let savedInToken = localStorage.getItem("id_token");
-    let result = savedInToken !== `invalid`;
-    result = ! this.isTokenExpired(savedInToken!);
-    if (!result) this.router.navigate(['/login'])
-    return result;
+      console.log("the gourd is called")
+      let savedInToken = localStorage.getItem("id_token");
+      let tokenIsNotInvalid = (savedInToken !== "invalid");
+      console.log("tokenIsNotInvalid" + tokenIsNotInvalid)
+      let tokenIsNotExpired = !this.isTokenExpired(savedInToken!);
+      console.log("tokenIsNotExpired" + tokenIsNotExpired)
+      if (!tokenIsNotExpired || !tokenIsNotInvalid) this.router.navigate(['/login'])
+      return (tokenIsNotExpired && tokenIsNotInvalid);
 
   }
 

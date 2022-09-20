@@ -3,13 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponentComponent} from "./login-component/login-component.component";
 import {FormListComponent} from "./form-list/form-list.component";
 import {TestComponent} from "./test/test.component";
+import {GuardServiceGuard} from "./guard-service.guard";
 
 const routes: Routes = [
   {path:'',component:LoginComponentComponent},
   { path: 'login', component: LoginComponentComponent },
-  { path: 'test', component: TestComponent },
+  { path: 'form', component: FormListComponent,canActivate:[GuardServiceGuard] },
 
-  { path: 'form', component: FormListComponent },
+  { path: 'test', component: TestComponent },
+  // {path:'home',component:DashboardComponent,canActivate:[AuthenticationGuard]}
 ];
 
 

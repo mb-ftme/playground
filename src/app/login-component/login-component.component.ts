@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 import {AuthService} from "../AuthService";
 import {userRQ} from "../models/userRQ";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-component',
@@ -12,7 +13,7 @@ import {userRQ} from "../models/userRQ";
 export class LoginComponentComponent  {
   // private url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService,public router:Router) { }
 
   form=new FormGroup({
     userName:new FormControl('',[Validators.required]),
@@ -36,8 +37,11 @@ export class LoginComponentComponent  {
       console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnn")
       console.log(userRQ1);
       console.log(res.token+"!!!!!!!!!!!!!!!!!!!!!")
+      this.router.navigate(["/form"])
       localStorage.setItem("id_token",res.token)
       console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
+
 
     })
 

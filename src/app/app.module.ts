@@ -13,6 +13,7 @@ import {AppRoutingModule} from "./AppRoutingModule";
 import {Router, RouterModule} from "@angular/router";
 import {AuthInterceptor} from "./auth.interceptor";
 import { TestComponent } from './test/test.component';
+import {GuardServiceGuard} from "./guard-service.guard";
 
 
 
@@ -37,7 +38,7 @@ import { TestComponent } from './test/test.component';
   ],
 //provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true
 //   }
-  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
+  providers: [AuthService,{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},GuardServiceGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
