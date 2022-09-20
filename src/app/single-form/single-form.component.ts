@@ -33,9 +33,9 @@ export class SingleFormComponent  {
 
 
   onSubmit() {
-    this.http.post(this.url, this.restForm.value).subscribe((data) => {
-      console.warn(data);
-    });
+    // this.http.post(this.url, this.restForm.value).subscribe((data) => {
+    //   console.warn(data);
+    // });
     let sta = this.getResponse(<ChaparRQ> this.restForm.value).subscribe((data) => {
       console.log(data);
       console.log(sta);
