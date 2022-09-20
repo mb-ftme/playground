@@ -1,5 +1,5 @@
 export interface chaparRES {
-  message: string;
+  message_fa: string;
   nationalCode: string;
   status: string;
 }

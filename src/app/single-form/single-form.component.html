@@ -1,0 +1,24 @@
+<section class='login-f' xmlns="http://www.w3.org/1999/html">
+  <div class="head-f">
+    <h1 class="company-f">ارسال پیامک</h1>
+  </div>
+
+  <form  class="form" [formGroup]="restForm">
+    <input class="text"  name="message" formControlName="message"
+           placeholder='متن پیام'  ><br>
+    <input class="password" name="nationalCode" formControlName="nationalCode"
+           placeholder='کد ملی' ><br>
+    <button class='btn-login-f' (click)="onSubmit()">ارسال</button>
+
+
+  </form>
+
+  {{myhtmlValue}}
+
+
+
+
+
+
+</section>
+

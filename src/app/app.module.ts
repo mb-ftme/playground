@@ -14,6 +14,7 @@ import {Router, RouterModule} from "@angular/router";
 import {AuthInterceptor} from "./auth.interceptor";
 import { TestComponent } from './test/test.component';
 import {GuardServiceGuard} from "./guard-service.guard";
+import { SingleFormComponent } from './single-form/single-form.component';
 
 
 
@@ -23,6 +24,7 @@ import {GuardServiceGuard} from "./guard-service.guard";
     LoginComponentComponent,
     FormListComponent,
     TestComponent,
+    SingleFormComponent,
 
 
   ],

@@ -10,13 +10,13 @@ import {userRQ} from "./models/userRQ";
 })
 export class AuthService {
    sever:string="http://192.168.16.171:4558";
-   url: string = 'http://localhost:8080/api/v1/auth/login'
+   url: string = this.sever+'/api/v1/auth/login'
 
 
   public lg=new BehaviorSubject(false);
   constructor(public http:HttpClient) { }
   login(rq:userRQ){
-    return this.http.post<userRS>('http://localhost:8080/api/v1/auth/login'
+    return this.http.post<userRS>(this.sever+'/api/v1/auth/login'
       ,rq)
 
   }
