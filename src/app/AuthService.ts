@@ -1,33 +1,26 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {userRS} from "./models/userRS";
-import {Observable, shareReplay} from "rxjs";
+import {BehaviorSubject, Observable, shareReplay, tap} from "rxjs";
+import {userRQ} from "./models/userRQ";
 
 
 @Injectable()
 export class AuthService {
    sever:string="http://192.168.16.171:4558";
-   url: string = 'http://192.168.16.171:4558/api/v1/auth/login'
-  constructor(private http: HttpClient) {
-
-  }
+   url: string = 'http://localhost:8080/api/v1/auth/login'
 
 
-//بنظر این تابع و تابع پایینی مشکل داره
-  login(userName:string, password:string ) {
-        let userRSObservable = this.http.post<userRS>(this.url, {userName, password},
-      {
-        headers:  new HttpHeaders({ 'No-Auth': 'True' })
-      }
+  public lg=new BehaviorSubject(false);
+  constructor(public http:HttpClient) { }
+  login(rq:userRQ){
+    return this.http.post(`http://localhost:8080/api/v1/auth/login`
+      ,rq).pipe(
+      tap(()=>{
+          this.lg.next(true);
+        }
       )
-      .pipe(shareReplay());
-      userRSObservable.subscribe(data=>{
-      console.log(data+"444444")
-      this.setSession(data)
-     })
-      return userRSObservable;
-
-
+    )
 
   }
 
