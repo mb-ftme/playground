@@ -34,6 +34,7 @@ export class AuthService {
     return this.http.post<string[]>(`${this.sever}/resource/upload`, formData, {
       reportProgress: true,
       observe: 'events'
+
     });
   }
   download() {

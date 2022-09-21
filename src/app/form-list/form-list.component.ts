@@ -60,6 +60,7 @@ export class FormListComponent {
       event => {
         console.log(event);
         this.resportProgress(event);
+
       },
       (error: HttpErrorResponse) => {
         console.log(error);
@@ -83,6 +84,8 @@ export class FormListComponent {
           this.fileStatus.status = 'done';
           for (const filename of httpEvent.body) {
             this.filenames.unshift(filename);
+            alert("اپلود شد")
+
           }
         } else {
           let fileName = httpEvent.headers.get('File-Name')!;
