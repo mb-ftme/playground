@@ -123,8 +123,15 @@ export class FormListComponent {
   }
 
       load() {
-    // console.log("///////////////////////////////////////////////")
-    this.auth.load()
+        this.auth.load()
+  }
+
+  loadWithMessage(){
+    this.auth.loadWithMessage(this.restForm.value.message!).subscribe(event=>{
+      alert("new function")
+      console.log(this.restForm.value.message);
+
+    })
   }
 
 

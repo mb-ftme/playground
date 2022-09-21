@@ -55,6 +55,11 @@ export class AuthService {
           error => console.log(error))
 
   }
+  loadWithMessage(message:string){
+    return this.http.post<any>("http://192.168.16.171:4558/load/load-with-message", {message})
+
+
+  }
 
 
 }
