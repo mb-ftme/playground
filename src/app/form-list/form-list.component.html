@@ -2,6 +2,20 @@
   <div class="head-f">
     <h1 class="company-f">ارسال پیامک</h1>
   </div>
+  <form  class="form" [formGroup]="restForm">
+    <input class="text"  name="message" formControlName="message"
+           placeholder='متن پیام'  ><br>
+
+<div>
+<br>
+  <br>
+
+    <input  type="file" (change)="onUploadFiles($any($event.target).files)" name="files" multiple class="form-control" />
+</div>
+    <button class='btn-login-f' (click)="onSubmit()"> ارسال با تعداد بالا</button>
+
+
+  </form>
 
 
 
@@ -22,7 +36,6 @@
         <form enctype="multipart/form-data">
 
 
-                <input  type="file" (change)="onUploadFiles($any($event.target).files)" name="files" multiple class="form-control" />
           <button class='btn-login-f' (click)="onDownloadFile() ">دانلود</button>
 
 
@@ -37,12 +50,15 @@
 
 
 
-
-  <button class='btn-login-f' (click)="load() ">آغاز فرایند ارسال پیامک</button>
+<!--  <button class='btn-login-f' (click)="load() ">آغاز فرایند ارسال پیامک</button>-->
 
   <div  class="js-upload-finished">
 
 
   </div>
 
+
+
+
 </section>
+

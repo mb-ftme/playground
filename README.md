@@ -1,2 +1,3 @@
-commit step one 
-adding the bootstrap
+# todo
+uploading files by click event instead of change
+
